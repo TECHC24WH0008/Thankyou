@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Gratitude</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ffeb99, #ffcc99, #ff9966);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+            opacity: 0;
+            transition: opacity 2s ease-in;
+        }
+
+        header.fade-in {
+            opacity: 1;
+        }
+
+        main {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .message-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        section {
+            margin-bottom: 20px;
+            opacity: 0;
+            transition: opacity 2s ease-in;
+        }
+
+        section.fade-in {
+            opacity: 1;
+        }
+
+        h2 {
+            color: #ff6600;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            opacity: 0;
+            transition: opacity 2s ease-in;
+        }
+
+        footer.fade-in {
+            opacity: 1;
+        }
+
+        .button {
+            background-color: #ff6600;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1.2em;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background-color: #cc5200;
+        }
+
+        /* Media Queries */
+        @media (max-width: 600px) {
+            .message-card {
+                width: 90%;
+                padding: 10px;
+                margin-bottom: 15px;
+                font-size: 1em; /* Adjust font size for smaller screens */
+                box-shadow: none; /* Remove shadow for smaller screens */
+                border-radius: 5px; /* Adjust border radius for smaller screens */
+                text-align: left; /* Align text to the left for better readability on smaller screens */
+                line-height: 1.5em; /* Line height for better readability on smaller screens */
+            }
+
+            .button {
+                width: 100%;
+                padding: 15px;
+                font-size: 1em;
+            }
+
+            h2 {
+                font-size: 1.5em; /* Adjust heading size for smaller screens */
+            }
+
+            p {
+                font-size: 1em; /* Adjust paragraph size for smaller screens */
+            }
+        }
+
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .message-card {
+                width: 80%;
+                padding: 15px;
+                margin-bottom: 20px;
+                font-size: 1.2em; /* Adjust font size for medium screens */
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for medium screens */
+                border-radius: 6px; /* Adjust border radius for medium screens */
+            }
+
+            .button {
+                width: auto;
+                padding: 12px 24px;
+                font-size: 1.1em;
+            }
+
+            h2 {
+                font-size: 1.75em; /* Adjust heading size for medium screens */
+            }
+
+            p {
+                font-size: 1.1em; /* Adjust paragraph size for medium screens */
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .message-card {
+                width: 70%;
+                padding: 20px;
+                margin-bottom: 25px;
+                font-size: 1.4em; /* Adjust font size for larger screens */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Standard shadow for larger screens */
+                border-radius: 8px; /* Standard border radius for larger screens */
+            }
+
+            .button {
+                width: auto;
+                padding: 15px 30px;
+                font-size: 1.2em;
+            }
+
+            h2 {
+                font-size: 2em; /* Adjust heading size for larger screens */
+            }
+
+            p {
+                font-size: 1.2em; /* Adjust paragraph size for larger screens */
+            }
+        }
+    </style>
+    <script>
+        // Prevent zooming with Ctrl + Mouse Wheel
+        document.addEventListener('wheel', function(event) {
+            if (event.ctrlKey) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+
+        // Prevent zooming with Ctrl + Plus/Minus keys
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && (event.key === '+' || event.key === '-' || event.key === '=')) {
+                event.preventDefault();
+            }
+        });
+    </script>
+</head>
+<body>
+    <header class="fade-in">
+        <h1>Gratitude</h1>
+        <p>We want to express our heartfelt thanks</p>
+    </header>
+    <main>
+        <div class="message-card fade-in">
+            <h2>Thank You!</h2>
+            <p>We would like to express our heartfelt gratitude for your generous support and cooperation in our overseas training program. Thanks to your assistance, we have been given the opportunity to gain valuable knowledge and experiences.<br>Click the button below to play one of four songs selected at random. Please enjoy!</p>
+        </div>
+        <button class="button fade-in" onclick="playRandomSong()"><i class="fas fa-heart"></i> Listen to a Song</button>
+        <audio id="sound"></audio>
+    </main>
+    <footer class="fade-in">
+        <p>&copy; 2024 TECH.C</p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const fadeInElements = document.querySelectorAll('.fade-in');
+            fadeInElements.forEach(element => {
+                element.classList.add('fade-in');
+            });
+        });
+
+        let lastPlayedSong = null;
+        let playedSongs = new Set();
+
+        function playRandomSong() {
+            const songs = ["song1.mp3", "song2.mp3", "song3.mp3", "song4.mp3"];
+            if (playedSongs.size === songs.length) {
+                alert("All songs have been played!");
+                playedSongs.clear(); // Reset the set to allow replaying
+            }
+
+            let song;
+            do {
+                song = songs[Math.floor(Math.random() * songs.length)];
+            } while (song === lastPlayedSong || playedSongs.has(song));
+            lastPlayedSong = song;
+            playedSongs.add(song);
+
+            const audioElement = document.getElementById("sound");
+            audioElement.src = song;
+            audioElement.play();
+        }
+    </script>
+</body>
+</html>
